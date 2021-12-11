@@ -230,7 +230,7 @@ def nearby_depot(location):
       closest=depots[i]['id']
       distance=current_distance
   return closest
-# If the lorry doesn't have enough gas, it will first go to the depot and subsequently deliver to the customer. 
+# If the lorry doesn't have enough gas, it will first go to the nearest depot and subsequently deliver to the customer. 
 def depot_and_deliver(v,c,end):
   
   depot=nearby_depot(lorries[v]['location'])
