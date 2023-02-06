@@ -32,18 +32,14 @@ for i in range(len(coordinates)):
     dist=math.sqrt((coordinates[i][0]-coordinates[j][0])**2+(coordinates[i][1]-coordinates[j][1])**2)
     distances[i].append(dist)
 edges=[]
-
-for i in range(len(links)):
- 
+for i in range(len(links)): 
     edges.append({})
     edges[i]['key']=links[i][0]
     edges[i]['links']=[]
     for j in range(len(links)):
       if(links[i][0]==links[j][0]):
         edges[i]['links'].append(links[j][1])
-    
- 
-  
+        
 #print(edges)
 g = nx.Graph()
 all_edges=[]
@@ -76,12 +72,9 @@ def possible_lorries(lorries,c,demands,custo_ids,under_threshold,under_ids):
       required=demands[c]['demand']
     vehicles=[]
     for i in range(len(lorries)):
-      stops=0
-      
-      
+      stops=0  
       if(lorries[i]['current']>=required):
-        to_customer=nx.single_source_dijkstra(g,source=lorries[i]['location'],target=target,weight='weight')[0]
-      
+        to_customer=nx.single_source_dijkstra(g,source=lorries[i]['location'],target=target,weight='weight')[0]      
         to_depot=nx.single_source_dijkstra(g,source=target,target=nearby_depot(target),weight='weight')[0]
         total_d=lorries[i]['miles']+to_customer+to_depot
         stops=lorries[i]['stops']+1
@@ -99,9 +92,7 @@ def possible_lorries(lorries,c,demands,custo_ids,under_threshold,under_ids):
            vehicles.append(i)
     return vehicles
 # From all the possible lorries, we compute the cost of delivering to the first customer in the list. 
-def cheapest_provider(options,c,lorries,demands,custo_ids,under_threshold,under_ids):
-  
-  
+def cheapest_provider(options,c,lorries,demands,custo_ids,under_threshold,under_ids): 
   if len(under_threshold)>0:
     end=under_ids[c]
     demand=under_threshold[c]['demand']
@@ -111,7 +102,6 @@ def cheapest_provider(options,c,lorries,demands,custo_ids,under_threshold,under_
     demand=demands[c]['demand']
   for i in range(len(options)):
      cost=0
-     
      v=options[i]
      location=lorries[v]['location']
      id=lorries[v]['lorry_id']
@@ -264,14 +254,11 @@ def depot_and_deliver1(lorries,v,c,customer_id,target,demands,custo_ids,under_th
  # Delivery to other customers, when the customers with that threshold of 15% are visited or if delivering to them would violate the constraints
 def deliver(lorries,v,c,journey,demands,custo_ids,under_threshold,under_ids):
   #customers=ds=nx.single_source_dijkstra(g,source=lorries[v]['location'],target=c,weight='weight')
-  
-  
   given_to_others=0
   
   available=lorries[v]['current']-demands[c]['demand']
   for i in range(1,len(journey[1])):
     if(i<len(journey[1])-1):
-
 
       if(journey[1][i] in custo_ids):
         id=journey[1][i]
