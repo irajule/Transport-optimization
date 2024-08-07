@@ -1,3 +1,6 @@
+# Question: Optimizing the transportation cost.
+#Data: 25 lorries with capacities: 5, 10, 15 and 20 tonnes, 123 customers and 4 depots. 
+#Constraints: lorries capacity
 import pandas as pd
 import numpy as np
 import math
